@@ -15,6 +15,22 @@ const insertIntoDB = async (req: Request, res: Response) => {
   }
 };
 
+const getAllPosts = async (req: Request, res: Response) => {
+  const options = req.query;
+  try {
+    const result = await postService.getAllPosts(options);
+    res.send({
+      status: "Success",
+      message: "Successfully added a post",
+      total: result.total,
+      data: result.data,
+    });
+  } catch (error) {
+    res.send(error);
+  }
+};
+
 export const postController = {
   insertIntoDB,
+  getAllPosts,
 };
